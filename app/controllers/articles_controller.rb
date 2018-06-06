@@ -1,49 +1,53 @@
+# frozen_string_literal: true
+
 class ArticlesController < ApplicationController
-    def index
-        @articles = Article.all
-    end
+  def index
+    @articles = Article.all
+  end
 
-    def edit
-        @article = Article.find(params[:id])
-    end
+  def edit
+    @article = Article.find(params[:id])
+  end
+
+  def show
+    @article = Article.find(params[:id])
+  end
+
+  def new
+    @article = Article.new
+  end
+
+  def create
+    debugger
+    @article = Article.new(article_params)
     
-    def show
-        @article = Article.find(params[:id])
+    if @article.save
+      redirect_to @article
+    else
+      render 'new'
     end
+  end
 
-    def new
-        @article = Article.new
+  def update
+    @article = Article.find(params[:id])
+
+    if @article.update(article_params)
+      redirect_to @article
+    else
+      render 'edit'
     end
+  end
 
-    def create
-        @article = Article.new(article_params)
+  def destroy
+    @article = Article.find(params[:id])
+    @article.destroy
 
-        if @article.save
-            redirect_to @article
-        else
-            render 'new'
-        end
-    end
+    redirect_to articles_path
+  end
 
-    def update
-        @article = Article.find(params[:id])
+  private
 
-        if @article.update(article_params)
-            redirect_to @article
-        else
-            render 'edit'
-        end    
-    end
-
-    def destroy
-        @article = Article.find(params[:id])
-        @article.destroy
-        
-        redirect_to articles_path
-    end
-
-    private
-        def article_params
-            params.require(:article).permit(:title,:text)
-        end
+  def article_params
+    params.require(:article).permit(:title, :text).merge(user: current_user)
+  end
 end

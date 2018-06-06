@@ -1,16 +1,26 @@
 <h1>Listing Articles</h1>
 <%= link_to 'New article', new_article_path %>
-<table>
+<style>
+td
+{border-left:1px solid black;
+border-top:1px solid black;}
+table
+{border-right:1px solid black;
+border-bottom:1px solid black;}
+</style>
+<table >
     <tr>
         <th>Title</th>
         <th>Text</th>
-        <th></th>
+        <th>Email</th>
     </tr>
 
     <% @articles.each do |article| %>
         <tr>
             <td><%= article.title  %></td>
             <td><%=  article.text %></td>
+            <td><%=  article.user.email %></td>
+
             <td><%=  link_to 'Retrieve', article_path(article)%></td>
             <td><%= link_to 'Update', edit_article_path(article) %></td>
             <td><%= link_to 'Delete', article_path(article),
