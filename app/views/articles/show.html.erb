@@ -13,12 +13,20 @@
   <%= @article.user.email %>
 </p>
  
-<%= link_to 'Edit', edit_article_path(@article) %> |
-<%= link_to 'Back', articles_path %>
+
+<%if user_signed_in? %>
+  <%if current_user==@article.user %>
+
+		<%= link_to 'Edit', edit_article_path(@article) %> |
+		<%= link_to 'Back', articles_path %>
+	<% end %>
+<% end %>
 
 <h2>Comments</h2>
 <%= render @article.comments %>
- 
-<h2>Add a comment:</h2>
-<%= render 'comments/form' %>
+
+<%if user_signed_in? %>
+  <h2>Add a comment:</h2>
+  <%= render 'comments/form' %>
+<% end %>
  
