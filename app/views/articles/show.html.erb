@@ -1,3 +1,5 @@
+<div class="jumbotron">
+
 <p>
   <strong>Title:</strong>
   <%= @article.title %>
@@ -16,17 +18,17 @@
 
 <%if user_signed_in? %>
   <%if current_user==@article.user %>
-
 		<%= link_to 'Edit', edit_article_path(@article) %> |
-		<%= link_to 'Back', articles_path %>
 	<% end %>
 <% end %>
-
-<h2>Comments</h2>
-<%= render @article.comments %>
+<%= link_to 'Back', articles_path %>
 
 <%if user_signed_in? %>
-  <h2>Add a comment:</h2>
+  <h3>Add a comment:</h3>
   <%= render 'comments/form' %>
 <% end %>
- 
+
+<h3>Comments</h3>
+<%= render @comments %>
+
+</div>

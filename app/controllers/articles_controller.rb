@@ -8,9 +8,9 @@ class ArticlesController < ApplicationController
   end
 
   def edit
-	@article = Article.find(params[:id])
-	if current_user == @article.user
-	  redirect_to 'articles#update'
+    @article = Article.find(params[:id])
+    if current_user == @article.user
+      
     else
       redirect_to root_url, notice: 'You are not authorised.'
     end
@@ -18,6 +18,7 @@ class ArticlesController < ApplicationController
 
   def show
     @article = Article.find(params[:id])
+    @comments = @article.comments.to_a
   end
 
   def new

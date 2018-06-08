@@ -1,18 +1,11 @@
-<p>
-  <strong>Commenter:</strong>
-  <%= comment.user.email %>
-</p>
- 
-<p>
-  <strong>Comment:</strong>
-  <%= comment.body %>
-</p>
-<%if user_signed_in? %>
+<li>
+  <strong><%= comment.user.email %></strong> : <%= comment.body %>
+  <%if user_signed_in? %>
   <%if current_user==comment.user %>
-    <p>
-      <%= link_to 'Destroy Comment', [comment.article, comment],
-                  method: :delete,
-                  data: { confirm: 'Are you sure?' } %>
-    </p>
+      | <%= link_to 'Destroy Comment', [comment.article, comment],
+                method: :delete,
+                data: { confirm: 'Are you sure?' } %>
   <% end %>
 <% end %>
+</li>
+ 

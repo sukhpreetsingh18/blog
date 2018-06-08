@@ -1,10 +1,10 @@
 <%= form_with(model: [ @article, @article.comments.build ], local: true) do |form| %>
 
-  <p>
+  <ul>
     <%= form.label :body %><br>
     <%= form.text_area :body %>
-  </p>
-  <p>
+  </ul>
+  <ul>
     <%= form.submit %>
-  </p>
+  </ul>
 <% end %>

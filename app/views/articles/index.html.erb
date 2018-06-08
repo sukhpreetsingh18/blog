@@ -1,35 +1,36 @@
-<h1>Listing Articles</h1>
-<%= link_to 'New article', new_article_path %>
-<style>
-td
-{border-left:1px solid black;
-border-top:1px solid black;}
-table
-{border-right:1px solid black;
-border-bottom:1px solid black;}
-</style>
-<table >
-    <tr>
-        <th>Title</th>
-        <th>Text</th>
-        <th>Email</th>
-    </tr>
+<div class="jumbotron">
+    <h1>Articles</h1>
+    <%= link_to 'New article', new_article_path %>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Text</th>
+                    <th>Email</th>
+                    <th colspan="3">Actions</th>
+                </tr>
+            </thead>
 
-    <% @articles.each do |article| %>
-        <tr>
-            <td><%= article.title  %></td>
-            <td><%=  article.text %></td>
-            <td><%=  article.user.email %></td>
-            <td><%=  link_to 'Show', article_path(article)%></td>
+            <% @articles.each do |article| %>
+            <tbody>
+                <tr>
+                    <td><%= article.title  %></td>
+                    <td><%=  article.text %></td>
+                    <td><%=  article.user.email %></td>
+                    <td><%=  link_to 'Show', article_path(article)%></td>
 
-            <% if user_signed_in? %>
-                <% if current_user==article.user %>
-                    <td><%= link_to 'Update', edit_article_path(article) %></td>
-                    <td><%= link_to 'Delete', article_path(article),
-                            method: :delete,
-                            data: {confirm: 'Are you sure ?'} %></td>
-                <% end %>
+                    <% if user_signed_in? %>
+                        <% if current_user==article.user %>
+                            <td><%= link_to 'Update', edit_article_path(article) %></td>
+                            <td><%= link_to 'Delete', article_path(article),
+                                    method: :delete,
+                                    data: {confirm: 'Are you sure ?'} %></td>
+                        <% end %>
+                    <% end %>
+                </tr>
             <% end %>
-        </tr>
-    <% end %>
-</table>
+            </tbody>
+        </table>
+    </div>
+</div>
